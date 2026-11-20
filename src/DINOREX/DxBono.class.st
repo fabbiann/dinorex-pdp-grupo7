@@ -42,8 +42,8 @@ DxBono >> initialize [
 	super initialize.
 	ancho := 26.
 	alto := 26.
-	velocidad := 8.
-	x := 880.
+	velocidad := DxConfiguracion velocidadInicial.
+	x := DxConfiguracion anchoPantalla.
 	y := 315.
 ]
 

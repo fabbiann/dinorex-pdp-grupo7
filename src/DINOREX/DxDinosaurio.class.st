@@ -13,7 +13,8 @@ Class {
 		'enElSuelo',
 		'vidas',
 		'ticksInvulnerable',
-		'ticksAnimacion'
+		'ticksAnimacion',
+		'ticksInvulnerabilidad'
 	],
 	#category : 'DINOREX',
 	#package : 'DINOREX'
@@ -63,8 +64,8 @@ DxDinosaurio >> estaVivo [
 
 { #category : 'acciones' }
 DxDinosaurio >> ganarVida [
-	"Recupera 1 vida sin superar el máximo de 3"
-	vidas < 3 ifTrue: [
+	"Recupera 1 vida sin superar el maximo permitido"
+	vidas < DxConfiguracion vidasIniciales ifTrue: [
 		vidas := vidas + 1 ].
 ]
 
@@ -77,18 +78,18 @@ DxDinosaurio >> initialize [
 	y := self sueloY.
 	velocidadY := 0.
 	enElSuelo := true.
-	vidas := 3.
-	ticksInvulnerable := 0.
+	vidas := DxConfiguracion vidasIniciales.
+	ticksInvulnerabilidad := 0.
 	ticksAnimacion := 0.
 ]
 
 { #category : 'acciones' }
 DxDinosaurio >> perderVida [
-	"Resta 1 vida si no es invulnerable y activa 2 segundos (60 ticks) de protección"
+	"Resta 1 vida si no es invulnerable y activa el tiempo de proteccion"
 	self estaInvulnerable ifFalse: [
 		vidas > 0 ifTrue: [
 			vidas := vidas - 1.
-			ticksInvulnerable := 60 ] ].
+			ticksInvulnerabilidad := DxConfiguracion ticksInvulnerabilidad ] ].
 ]
 
 { #category : 'consultas' }
@@ -118,7 +119,7 @@ DxDinosaurio >> spriteActual [
 
 { #category : 'consultas' }
 DxDinosaurio >> sueloY [
-	^ 400 - alto
+	^ DxConfiguracion alturaSuelo - alto
 ]
 
 { #category : 'consultas' }

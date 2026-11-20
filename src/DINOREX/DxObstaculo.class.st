@@ -37,9 +37,9 @@ DxObstaculo >> initialize [
 	super initialize.
 	ancho := 30.
 	alto := 45.
-	velocidad := 8.
-	x := 880.
-	y := 400 - alto.
+	velocidad := DxConfiguracion velocidadInicial.
+	x := DxConfiguracion anchoPantalla.
+	y := DxConfiguracion alturaSuelo - alto.
 ]
 
 { #category : 'consultas' }

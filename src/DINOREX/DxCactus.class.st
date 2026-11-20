@@ -28,5 +28,5 @@ DxCactus >> initialize [
 	super initialize.
 	ancho := 28.
 	alto := 48.
-	y := 400 - alto.
+	y := DxConfiguracion alturaSuelo - alto.
 ]

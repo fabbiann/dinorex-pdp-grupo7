@@ -8,10 +8,12 @@ Class {
 	#package : 'DINOREX'
 }
 
-{ #category : 'accessing' }
+{ #category : 'acceso' }
 Dinorex class >> jugar [
 	| juego |
-	DxSprites actual imagenCompletaNombrada: 'fondo_menu' escaladaA: (880 @ 495).
+	DxSprites actual
+		imagenCompletaNombrada: 'fondo_menu'
+		escaladaA: (DxConfiguracion anchoPantalla @ DxConfiguracion altoPantalla).
 	juego := DxJuego new.
 	juego openInWindowLabeled: 'DINOREX'.
 	^ juego
