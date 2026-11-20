@@ -40,8 +40,8 @@ DxRanking >> agregarNombre: unNombre puntaje: unPuntaje [
 
 { #category : 'consultas' }
 DxRanking >> archivoRanking [
-	"Devuelve la referencia al archivo de texto en la carpeta de trabajo"
-	^ FileSystem workingDirectory / 'dinorex_ranking.txt'
+	"Devuelve la referencia al archivo de texto junto a la imagen de Pharo"
+	^ FileLocator imageDirectory asFileReference / 'dinorex_ranking.txt'
 ]
 
 { #category : 'acciones' }
