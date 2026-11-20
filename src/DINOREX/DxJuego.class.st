@@ -52,12 +52,13 @@ DxJuego >> drawOn: unCanvas [
 		color: Color black.
 
 	estado = #transicion ifTrue: [
-		| offsetBarrido anchoRestante |
-		offsetBarrido := (ticksTransicion * 110) min: 880.
-		anchoRestante := 880 - offsetBarrido.
+		| anchoPantalla offsetBarrido anchoRestante |
+		anchoPantalla := DxConfiguracion anchoPantalla.
+		offsetBarrido := (ticksTransicion * (anchoPantalla // 8)) min: anchoPantalla.
+		anchoRestante := anchoPantalla - offsetBarrido.
 		anchoRestante > 0 ifTrue: [
 			unCanvas
-				fillRectangle: ((self position + (offsetBarrido @ 0)) extent: (anchoRestante @ 495))
+				fillRectangle: ((self position + (offsetBarrido @ 0)) extent: (anchoRestante @ DxConfiguracion altoPantalla))
 				color: (Color r: 0.96 g: 0.78 b: 0.35 alpha: 0.85) ].
 		^ self ].
 
@@ -131,8 +132,8 @@ DxJuego >> initialize [
 	obstaculos := OrderedCollection new.
 	bonos := OrderedCollection new.
 	generador := DxGenerador new.
-	self extent: 880 @ 495.
-	self color: (Color r: 0.25 g: 0.14 b: 0.12).
+	self extent: (DxConfiguracion anchoPantalla @ DxConfiguracion altoPantalla).
+	self color: Color white.
 ]
 
 { #category : 'ciclo del juego' }
@@ -226,8 +227,7 @@ DxJuego >> stepTime [
 
 { #category : 'consultas' }
 DxJuego >> velocidadActual [
-	"Arranca en 8 y sube 1 por cada 100 puntos, con tope en 18"
-	^ (8 + (jugador puntuacion // 100)) min: 18
+	^ (DxConfiguracion velocidadInicial + (jugador puntuacion // 100)) min: DxConfiguracion velocidadMaxima
 ]
 
 { #category : 'acciones' }
