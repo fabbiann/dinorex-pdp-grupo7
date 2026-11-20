@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Obstaculo terrestre concreto que se desplaza por el suelo hacia el dinosaurio.
 "
 Class {
 	#name : 'DxCactus',
@@ -23,7 +23,7 @@ DxCactus >> dibujarEn: unCanvas origen: puntoOrigen [
 			unCanvas fillRectangle: rectangulo color: Color green muchDarker ].
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxCactus >> initialize [
 	super initialize.
 	ancho := 28.

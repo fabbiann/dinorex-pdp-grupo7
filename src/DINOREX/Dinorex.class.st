@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Punto de entrada principal del juego. El mensaje de clase jugar abre la ventana de DINOREX.
 "
 Class {
 	#name : 'Dinorex',

@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Bono concreto que recupera una vida al dinosaurio sin superar el maximo permitido.
 "
 Class {
 	#name : 'DxCorazon',

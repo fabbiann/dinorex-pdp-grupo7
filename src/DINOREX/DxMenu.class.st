@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Maneja las opciones del menu principal (COMENZAR JUEGO, BORRAR RANKING, SALIR) y dibuja la portada junto con el Top 3.
 "
 Class {
 	#name : 'DxMenu',
@@ -117,7 +117,7 @@ DxMenu >> elegirEn: unJuego [
 	elegida = 'SALIR' ifTrue: [ unJuego cerrarJuego ].
 ]
 
-{ #category : 'initialization' }
+{ #category : 'inicializacion' }
 DxMenu >> initialize [
 	super initialize.
 	opciones := #('COMENZAR JUEGO' 'BORRAR RANKING' 'SALIR').

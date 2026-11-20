@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Administra el historial de los 3 mejores puntajes y los guarda en un archivo de texto para que persistan entre sesiones.
 "
 Class {
 	#name : 'DxRanking',
@@ -20,11 +20,6 @@ DxRanking class >> actual [
 		actual := self new.
 		actual cargarDesdeArchivo ].
 	^ actual
-]
-
-{ #category : 'acceso' }
-DxRanking class >> reiniciarActual [
-	actual := self new.
 ]
 
 { #category : 'acciones' }
@@ -58,15 +53,17 @@ DxRanking >> cargarDesdeArchivo [
 	archivo exists ifFalse: [ ^ self ].
 	archivo readStreamDo: [ :stream |
 		[ stream atEnd ] whileFalse: [
-			| linea partes |
+			| linea partes textoPuntaje |
 			linea := stream nextLine.
 			linea isEmpty ifFalse: [
 				partes := linea splitOn: $;.
 				partes size = 2 ifTrue: [
-					registros add: (Dictionary new
-						at: #nombre put: partes first;
-						at: #puntaje put: partes second asInteger;
-						yourself) ] ] ] ].
+					textoPuntaje := partes second trimBoth.
+					(textoPuntaje notEmpty and: [ textoPuntaje allSatisfy: #isDigit ]) ifTrue: [
+						registros add: (Dictionary new
+							at: #nombre put: partes first;
+							at: #puntaje put: textoPuntaje asInteger;
+							yourself) ] ] ] ] ].
 ]
 
 { #category : 'consultas' }
@@ -79,18 +76,20 @@ DxRanking >> esRecord: unPuntaje [
 
 { #category : 'acciones' }
 DxRanking >> guardarEnArchivo [
-	"Escribe el Top 3 en un archivo de texto, una línea por jugador con formato nombre;puntaje"
+	"Escribe el Top 3 en un archivo de texto, una linea por jugador con formato nombre;puntaje"
 	self archivoRanking writeStreamDo: [ :stream |
 		stream truncate.
 		registros do: [ :cadaRegistro |
+			| nombreLimpio |
+			nombreLimpio := (cadaRegistro at: #nombre) copyReplaceAll: ';' with: ' '.
 			stream
-				nextPutAll: (cadaRegistro at: #nombre);
+				nextPutAll: nombreLimpio;
 				nextPut: $;;
 				nextPutAll: (cadaRegistro at: #puntaje) asString;
 				lf ] ].
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxRanking >> initialize [
 	super initialize.
 	registros := OrderedCollection new.

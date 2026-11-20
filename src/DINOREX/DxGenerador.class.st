@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Controla la aparicion aleatoria de nuevos obstaculos y bonos manteniendo una separacion minima entre ellos.
 "
 Class {
 	#name : 'DxGenerador',
@@ -45,7 +45,7 @@ DxGenerador >> calcularProximoIntervaloBono [
 	^ 250 + (200 atRandom)
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxGenerador >> initialize [
 	super initialize.
 	contador := 0.

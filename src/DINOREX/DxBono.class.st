@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Clase base abstracta de los elementos que avanzan por la pantalla y otorgan un beneficio al dinosaurio cuando los recoge.
 "
 Class {
 	#name : 'DxBono',
@@ -37,7 +37,7 @@ DxBono >> estaFuera [
 	^ (x + ancho) < 0
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxBono >> initialize [
 	super initialize.
 	ancho := 26.

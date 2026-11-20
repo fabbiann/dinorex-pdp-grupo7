@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Representa los datos del jugador de la partida actual: su nombre y su puntuacion acumulada.
 "
 Class {
 	#name : 'DxJugador',
@@ -12,7 +12,7 @@ Class {
 	#package : 'DINOREX'
 }
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxJugador >> initialize [
 	super initialize.
 	nombre := 'Jugador'.

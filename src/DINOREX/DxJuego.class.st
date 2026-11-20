@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Ventana principal del juego (hereda de Morph). Dibuja la escena, recibe teclado y mouse, y coordina los estados menu, transicion, jugando y fin.
 "
 Class {
 	#name : 'DxJuego',
@@ -29,23 +29,23 @@ DxJuego >> cerrarJuego [
 ]
 
 { #category : 'dibujo' }
-DxJuego >> drawOn: aCanvas [
-	super drawOn: aCanvas.
+DxJuego >> drawOn: unCanvas [
+	super drawOn: unCanvas.
 	estado = #menu ifTrue: [
-		menu dibujarEn: aCanvas origen: self position.
+		menu dibujarEn: unCanvas origen: self position.
 		^ self ].
 
-	mapa dibujarEn: aCanvas origen: self position.
-	obstaculos do: [ :cadaUno | cadaUno dibujarEn: aCanvas origen: self position ].
-	bonos do: [ :cadaBono | cadaBono dibujarEn: aCanvas origen: self position ].
-	dinosaurio dibujarEn: aCanvas origen: self position.
+	mapa dibujarEn: unCanvas origen: self position.
+	obstaculos do: [ :cadaUno | cadaUno dibujarEn: unCanvas origen: self position ].
+	bonos do: [ :cadaBono | cadaBono dibujarEn: unCanvas origen: self position ].
+	dinosaurio dibujarEn: unCanvas origen: self position.
 
-	aCanvas
+	unCanvas
 		drawString: 'Vidas: ', dinosaurio vidas asString
 		at: self position + (20 @ 20)
 		font: StandardFonts defaultFont
 		color: Color black.
-	aCanvas
+	unCanvas
 		drawString: 'Puntaje: ', jugador puntuacion asString
 		at: self position + (730 @ 20)
 		font: StandardFonts defaultFont
@@ -56,18 +56,18 @@ DxJuego >> drawOn: aCanvas [
 		offsetBarrido := (ticksTransicion * 110) min: 880.
 		anchoRestante := 880 - offsetBarrido.
 		anchoRestante > 0 ifTrue: [
-			aCanvas
+			unCanvas
 				fillRectangle: ((self position + (offsetBarrido @ 0)) extent: (anchoRestante @ 495))
 				color: (Color r: 0.96 g: 0.78 b: 0.35 alpha: 0.85) ].
 		^ self ].
 
 	estado = #fin ifTrue: [
-		aCanvas
+		unCanvas
 			drawString: 'GAME OVER'
 			at: self position + (390 @ 180)
 			font: StandardFonts defaultFont
 			color: Color red.
-		aCanvas
+		unCanvas
 			drawString: 'Puntaje final: ', jugador puntuacion asString, ' | Presiona ENTER para volver al menu'
 			at: self position + (280 @ 210)
 			font: StandardFonts defaultFont
@@ -92,12 +92,12 @@ DxJuego >> finalizarPartida [
 ]
 
 { #category : 'teclado' }
-DxJuego >> handlesKeyboard: anEvent [
+DxJuego >> handlesKeyboard: unEvento [
 	^ true
 ]
 
 { #category : 'teclado' }
-DxJuego >> handlesMouseDown: anEvent [
+DxJuego >> handlesMouseDown: unEvento [
 	^ true
 ]
 
@@ -118,7 +118,7 @@ DxJuego >> iniciarPartida [
 	self startStepping.
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxJuego >> initialize [
 	super initialize.
 	estado := #menu.
@@ -135,11 +135,12 @@ DxJuego >> initialize [
 	self color: (Color r: 0.25 g: 0.14 b: 0.12).
 ]
 
-{ #category : 'initialize' }
-DxJuego >> intoWorld: aWorld [
-	super intoWorld: aWorld.
+{ #category : 'ciclo del juego' }
+DxJuego >> intoWorld: unMundo [
+	super intoWorld: unMundo.
 	self startStepping.
 	self takeKeyboardFocus.
+
 ]
 
 { #category : 'dibujo' }
@@ -149,12 +150,12 @@ DxJuego >> isOpaque [
 ]
 
 { #category : 'teclado' }
-DxJuego >> keyDown: anEvent [
+DxJuego >> keyDown: unEvento [
 	| tecla esEnter esArriba esAbajo esSalto |
-	tecla := anEvent keyValue.
-	esEnter := tecla = 13 or: [ anEvent key name = #RETURN or: [ anEvent key name = #KP_ENTER ] ].
-	esArriba := tecla = 30 or: [ anEvent key name = #UP ].
-	esAbajo := tecla = 31 or: [ anEvent key name = #DOWN ].
+	tecla := unEvento keyValue.
+	esEnter := tecla = 13 or: [ unEvento key name = #RETURN or: [ unEvento key name = #KP_ENTER ] ].
+	esArriba := tecla = 30 or: [ unEvento key name = #UP ].
+	esAbajo := tecla = 31 or: [ unEvento key name = #DOWN ].
 	esSalto := tecla = 32 or: [ esArriba ].
 
 	estado = #menu ifTrue: [
@@ -172,10 +173,10 @@ DxJuego >> keyDown: anEvent [
 ]
 
 { #category : 'teclado' }
-DxJuego >> mouseDown: anEvent [
+DxJuego >> mouseDown: unEvento [
 	self takeKeyboardFocus.
 	estado = #menu ifTrue: [
-		menu clicEn: (anEvent position - self position) juego: self ].
+		menu clicEn: (unEvento position - self position) juego: self ].
 ]
 
 { #category : 'ciclo del juego' }

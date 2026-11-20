@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Clase base abstracta de los obstaculos que avanzan hacia la izquierda y quitan una vida al chocar con el dinosaurio.
 "
 Class {
 	#name : 'DxObstaculo',
@@ -32,7 +32,7 @@ DxObstaculo >> estaFuera [
 	^ (x + ancho) < 0
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxObstaculo >> initialize [
 	super initialize.
 	ancho := 30.

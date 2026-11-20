@@ -1,5 +1,5 @@
 "
-Clase del proyecto Dinorex
+Representa al personaje principal. Controla el salto con gravedad, la animacion, sus vidas y el tiempo de invulnerabilidad tras un choque.
 "
 Class {
 	#name : 'DxDinosaurio',
@@ -68,7 +68,7 @@ DxDinosaurio >> ganarVida [
 		vidas := vidas + 1 ].
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxDinosaurio >> initialize [
 	super initialize.
 	ancho := 40.

@@ -1,12 +1,11 @@
 "
-Clase del proyecto Dinorex
+Dibuja y desplaza continuamente el fondo del escenario y el suelo para dar sensacion de movimiento.
 "
 Class {
 	#name : 'DxMapa',
 	#superclass : 'Object',
 	#instVars : [
 		'ancho',
-		'alto',
 		'velocidad',
 		'desplazamiento'
 	],
@@ -63,11 +62,10 @@ DxMapa >> dibujarEn: unCanvas origen: puntoOrigen [
 				posX := posX + 40 ] ].
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxMapa >> initialize [
 	super initialize.
 	ancho := 880.
-	alto := 495.
 	velocidad := 8.
 	desplazamiento := 0.
 ]

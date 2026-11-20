@@ -1,5 +1,5 @@
 "
-carga y entrega las imagenes
+Carga las imagenes PNG desde la carpeta sprites y las conserva en memoria para reutilizarlas rapidamente; si falta una imagen, el juego dibuja un rectangulo.
 "
 Class {
 	#name : 'DxSprites',
@@ -69,14 +69,9 @@ DxSprites >> imagenNombrada: unNombre [
 			ifFalse: [ nil ] ]
 ]
 
-{ #category : 'initialize' }
+{ #category : 'inicializacion' }
 DxSprites >> initialize [
 	super initialize.
-	imagenes := Dictionary new.
-]
-
-{ #category : 'acciones' }
-DxSprites >> limpiarCache [
 	imagenes := Dictionary new.
 ]
 
