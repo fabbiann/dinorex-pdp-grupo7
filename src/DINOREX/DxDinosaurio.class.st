@@ -13,8 +13,7 @@ Class {
 		'enElSuelo',
 		'vidas',
 		'ticksInvulnerable',
-		'ticksAnimacion',
-		'ticksInvulnerabilidad'
+		'ticksAnimacion'
 	],
 	#category : 'DINOREX',
 	#package : 'DINOREX'
@@ -79,7 +78,7 @@ DxDinosaurio >> initialize [
 	velocidadY := 0.
 	enElSuelo := true.
 	vidas := DxConfiguracion vidasIniciales.
-	ticksInvulnerabilidad := 0.
+	ticksInvulnerable := 0.
 	ticksAnimacion := 0.
 ]
 
@@ -89,7 +88,7 @@ DxDinosaurio >> perderVida [
 	self estaInvulnerable ifFalse: [
 		vidas > 0 ifTrue: [
 			vidas := vidas - 1.
-			ticksInvulnerabilidad := DxConfiguracion ticksInvulnerabilidad ] ].
+			ticksInvulnerable := DxConfiguracion ticksInvulnerabilidad ] ].
 ]
 
 { #category : 'consultas' }
