@@ -4,6 +4,9 @@ Punto de entrada principal del juego. El mensaje de clase jugar abre la ventana 
 Class {
 	#name : 'Dinorex',
 	#superclass : 'Object',
+	#instVars : [
+		'lautaro'
+	],
 	#category : 'DINOREX',
 	#package : 'DINOREX'
 }
